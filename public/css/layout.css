@@ -130,6 +130,7 @@ a {
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
+  white-space: pre;
 }
 .contents .chattingBox .list li .msgBox .inner .time {
   font-size: 12px;

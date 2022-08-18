@@ -77,16 +77,26 @@
         socket.emit("chatting", chattingItem);
         $(".sendBox #msg").val("");
       });
+      // $(".sendBox #msg").on("keyup", function (e) {
+      //   if (e.key === "Enter") {
+      //     e.preventDefault();
+      //     $("#msg").val("");
+      //     return;
+      //   }
+      // });
       $(".sendBox #msg").on("keydown", function (e) {
+        console.log(e);
         if (e.key === "Enter") {
           if ($("#msg").val().trim() === "") {
             e.preventDefault();
             $("#msg").val("");
             return;
           }
-          const chattingItem = { nickName: $("#nickName").val(), msg: $(".sendBox #msg").val() };
-          socket.emit("chatting", chattingItem);
-          $(".sendBox #msg").val("");
+          if (!e.shiftKey) {
+            const chattingItem = { nickName: $("#nickName").val(), msg: $(".sendBox #msg").val().replaceAll("\n|\r\n", "<br>") };
+            socket.emit("chatting", chattingItem);
+            $(".sendBox #msg").val("");
+          }
         }
         if ($("#msg").val() !== "") {
           $(".btnSend").addClass("on");
